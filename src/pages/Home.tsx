@@ -14,7 +14,7 @@ import Dropdown from '../components/Dropdown';
 import Loading from '../components/Loading';
 import SearchBar from '../components/SearchBar';
 import { FILTER_REGIONS } from '../helpers/constants';
-import { HomeWrapper } from './pageStyles';
+import { MainWrapper } from './pageStyles';
 
 function Home() {
     const countries = useAppSelector(allCountries);
@@ -56,7 +56,7 @@ function Home() {
     }, []);
 
     return (
-        <HomeWrapper>
+        <MainWrapper>
             <div className="home-header">
                 <SearchBar
                     value={searchValue}
@@ -79,7 +79,7 @@ function Home() {
                         </Link>
                     );
                 })}
-        </HomeWrapper>
+        </MainWrapper>
     );
 }
 

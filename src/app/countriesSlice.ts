@@ -1,12 +1,11 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Root } from 'react-dom/client';
 import { RootState } from './store';
 
 export interface CountryState {
     countries: any[];
 	filteredCountries: any[];
-    selectedCountry: {};
+    selectedCountry: any;
     status: 'idle' | 'loading' | 'failed';
     filterRegion: string;
 }
@@ -26,6 +25,16 @@ export const getFilteredCountries = createAsyncThunk(
     async (region: string) => {
         const response = await axios.get(
             `${process.env.REACT_APP_COUNTRIES_API_URL}/region/${region}`
+        );
+        return response.data;
+    }
+);
+
+export const getCountryDetail = createAsyncThunk(
+    'countries/fetchCountryDetail',
+    async (cca3Code: string) => {
+        const response = await axios.get(
+            `${process.env.REACT_APP_COUNTRIES_API_URL}/alpha/${cca3Code}`
         );
         return response.data;
     }
@@ -65,6 +74,16 @@ export const countriesSlice = createSlice({
             })
             .addCase(getFilteredCountries.rejected, (state) => {
                 state.status = 'failed';
+            })
+            .addCase(getCountryDetail.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getCountryDetail.fulfilled, (state, action) => {
+                state.status = 'idle';
+                state.selectedCountry = action.payload?.[0];
+            })
+            .addCase(getCountryDetail.rejected, (state) => {
+                state.status = 'failed';
             });
     },
 });
@@ -74,5 +93,6 @@ export const filteredCountries = (state: RootState) => state.countries.filteredC
 export const status = (state: RootState) => state.countries.status;
 export const selectedRegion = (state: RootState) =>
     state.countries.filterRegion;
+export const selectedCountry = (state: RootState) => state.countries.selectedCountry;
 
 export default countriesSlice.reducer;

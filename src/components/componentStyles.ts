@@ -159,3 +159,19 @@ export const StyledLoading = styled.div`
         }
     }
 `
+
+export const StyledButton = styled.button`
+    padding: 5px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 24px;
+    border: 1px solid hsl(0, 0%, 95%);
+    box-shadow: 0px 0px 6px hsl(0, 0%, 80%);
+    background-color: hsl(0, 0%, 100%);
+    border-radius: 5px;
+    cursor: pointer;
+    & > :first-child {
+        margin-right: 10px;
+    }
+`

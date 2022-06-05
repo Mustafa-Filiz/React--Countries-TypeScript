@@ -11,7 +11,7 @@ function CountryCard({country}: CountryCardProps): JSX.Element {
 
   return (
 	<StyledCountryCard>
-		<img src={flags.png} alt={name.common} />
+		<img src={flags.svg} alt={name.common} />
 		<div className="body">
 			<h3>{name.common}</h3>
 			<p><strong>Population:</strong> {population}</p>
