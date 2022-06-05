@@ -16,4 +16,11 @@ export const HomeWrapper = styled.div`
 		justify-content: space-between;
 		align-items: center;
     }
+    & > a {
+        text-decoration: none;
+        color: hsl(0, 0%, 0%);
+        &:active {
+            color: hsl(0, 0%, 0%);
+        }
+    }
 `;

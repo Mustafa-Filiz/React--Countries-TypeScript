@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     DropdownTrigger,
     DropdownOverlay,
@@ -11,15 +11,20 @@ interface DropdownProps {
     placeholder?: string;
     open?: boolean;
     options: string[];
+	onChange: (value: string) => void;
 }
 
-function Dropdown({ value, placeholder, open = false, options }: DropdownProps) {
+function Dropdown({ value, placeholder, open = false, options, onChange }: DropdownProps) {
     const [isOpen, setIsOpen] = useState<boolean>(open);
     const [selectedItem, setSelectedItem] = useState<string>(value);
 
     function handleToggle(): void {
         setIsOpen((prev) => !prev);
     }
+
+	useEffect(() => {
+		onChange(selectedItem);
+	}, [selectedItem]);
 
     return (
         <StyledDropdown>

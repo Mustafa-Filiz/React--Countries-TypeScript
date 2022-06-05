@@ -1,19 +1,24 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
     allCountries,
+    filteredCountries,
     getAllCountries,
+    getFilteredCountries,
     selectedRegion,
     status,
 } from '../app/countriesSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import CountryCard from '../components/CountryCard';
 import Dropdown from '../components/Dropdown';
+import Loading from '../components/Loading';
 import SearchBar from '../components/SearchBar';
 import { FILTER_REGIONS } from '../helpers/constants';
 import { HomeWrapper } from './pageStyles';
 
 function Home() {
     const countries = useAppSelector(allCountries);
+    const filtered = useAppSelector(filteredCountries);
     const requestStatus = useAppSelector(status);
     const region = useAppSelector(selectedRegion);
     const dispatch = useAppDispatch();
@@ -24,21 +29,31 @@ function Home() {
         setSearchValue(event.target.value);
     }
 
+    function handleFilterChange(value: string): void {
+        if (value === 'All') {
+            dispatch(getAllCountries());
+            return;
+        }
+        dispatch(getFilteredCountries(value));
+    }
+
+    const displayedCountries = useMemo(() => {
+        return filtered.length > 0 ? filtered : countries;
+    }, [filtered, countries]);
+
     const searchedCountries = useMemo(
         () =>
-            countries.filter((country) => {
+            displayedCountries.filter((country) => {
                 return country.name.common
                     .toLowerCase()
                     .includes(searchValue.toLowerCase());
             }),
-        [countries, searchValue]
+        [displayedCountries, searchValue]
     );
 
     useEffect(() => {
         dispatch(getAllCountries());
-    }, [dispatch]);
-
-    console.log(countries);
+    }, []);
 
     return (
         <HomeWrapper>
@@ -52,12 +67,17 @@ function Home() {
                     value={region}
                     options={FILTER_REGIONS}
                     placeholder="Filter by Region"
+                    onChange={handleFilterChange}
                 />
             </div>
-            {requestStatus === 'loading' && <h1>Loading...</h1>}
+            {requestStatus === 'loading' && <Loading />}
             {searchedCountries.length > 0 &&
                 searchedCountries.map((country) => {
-                    return <CountryCard key={country.cca3} country={country} />;
+                    return (
+                        <Link to={`/detail/${country.cca3.toLowerCase()}`} key={country.cca3}>
+                            <CountryCard country={country} />
+                        </Link>
+                    );
                 })}
         </HomeWrapper>
     );

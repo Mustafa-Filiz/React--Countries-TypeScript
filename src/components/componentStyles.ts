@@ -20,6 +20,11 @@ export const StyledCountryCard = styled.div`
     border: 1px solid hsl(0, 0%, 95%);
     box-shadow: 0px 0px 6px hsl(0, 0%, 88%);
     background-color: hsl(0, 0%, 100%);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        transform: scale(1.02);
+    }
     img {
         border-radius: 10px 10px 0 0;
         width: 100%;
@@ -56,6 +61,10 @@ export const StyledSearchBar = styled.div`
         border: none;
         outline: none;
         font-size: 16px;
+        height: 25px;
+    }
+    svg {
+        width: 25px;
         height: 25px;
     }
 `;
@@ -117,4 +126,36 @@ export const DropdownOverlay = styled.div`
 			background-color: hsl(0, 0%, 88%);
 		}
 	}
+`
+
+export const StyledLoading = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(0, 0%, 80%);
+    opacity: 0.6;
+    z-index: 1;
+    svg {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 20px;
+        animation-name: spin;
+        animation-duration: 0.8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 `
