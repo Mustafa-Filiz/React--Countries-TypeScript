@@ -30,6 +30,7 @@ function Home() {
     }
 
     function handleFilterChange(value: string): void {
+        if (!value) return
         if (value === 'All') {
             dispatch(getAllCountries());
             return;

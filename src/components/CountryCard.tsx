@@ -1,4 +1,4 @@
-import React from 'react'
+import NumberUtility from '../helpers/NumberUtility';
 import { StyledCountryCard } from './componentStyles'
 
 interface CountryCardProps {
@@ -11,10 +11,10 @@ function CountryCard({country}: CountryCardProps): JSX.Element {
 
   return (
 	<StyledCountryCard>
-		<img src={flags.svg} alt={name.common} />
+		<img src={flags.png} alt={name.common} width="320" height="213" />
 		<div className="body">
 			<h3>{name.common}</h3>
-			<p><strong>Population:</strong> {population}</p>
+			<p><strong>Population:</strong> {NumberUtility.formatToLocale(population)}</p>
 			<p><strong>Region:</strong> {region}</p>
 			<p><strong>Capital:</strong> {capital?.[0]}</p>
 		</div>

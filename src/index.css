@@ -13,7 +13,7 @@ body {
 }
 
 body::-webkit-scrollbar{
-  width: 0.5rem;
+  width: 0.7rem;
 }
 
 body::-webkit-scrollbar-track {
@@ -22,7 +22,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background: rgb(68, 82, 161);
+  background: rgb(64, 92, 252);
   height: 5rem;
   border-radius: 0.5rem;
 }

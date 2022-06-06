@@ -33,16 +33,44 @@ export const StyledDetailWrapper = styled(MainWrapper)`
         margin-top: 5rem;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: stretch;
         .img-wrapper {
-            width: 30rem;
             img {
-                width: 100%;
+                width: 30rem;
             }
         }
         .detail-content {
-            flex-grow: 1;
-            flex-shrink: 1;
+            margin-left: 2rem;
+            h1 {
+                margin-bottom: 2rem;
+                text-align: left;
+            }
+            .detail-info {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                & > p {
+                    width: 45% ;
+                    margin-bottom: 1rem;
+                    text-align: left;
+                }
+            }
+            .border-countries {
+                width: 100%;
+                margin-top: 2rem;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 9rem);
+                grid-gap: 5px;
+                strong {
+                    grid-row: 1/10;
+                    text-align: left;
+                }
+                p {
+                    white-space: pre;
+                    text-overflow: ellipsis;
+                }
+            }
         }
     }
 `

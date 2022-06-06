@@ -2,11 +2,15 @@ import React from 'react'
 import { StyledLoading } from './componentStyles'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
-function Loading() {
+interface LoadingProps {
+	includeText?: boolean
+}
+
+function Loading({ includeText = true }: LoadingProps): JSX.Element {
   return (
 	<StyledLoading>
 		<AiOutlineLoading3Quarters />
-		<h1>Loading...</h1>
+		{includeText && <p>Loading...</p>}
 	</StyledLoading>
   )
 }
